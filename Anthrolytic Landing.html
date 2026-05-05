@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Anthrolytic — Hey Brandon, Jordan & Sam!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #111114;
+    --ink-2: #2a2a30;
+    --muted: #6b6b75;
+    --line: #ececef;
+    --purple: #8a3df0;
+    --purple-2: #a86bff;
+    --chip: #f4f4f6;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px 22px 56px;
+    padding-top: max(18px, env(safe-area-inset-top));
+    padding-bottom: max(56px, env(safe-area-inset-bottom));
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 2px 28px;
+    gap: 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    display: block;
+    flex: none;
+    object-fit: contain;
+  }
+  .wordmark {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: 20px;
+    color: var(--ink);
+  }
+  .menu-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  .menu-btn span {
+    display: block;
+    height: 2.5px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .menu-btn span:nth-child(1) { width: 22px; }
+  .menu-btn span:nth-child(2) { width: 18px; }
+  .menu-btn span:nth-child(3) { width: 14px; }
+
+
+
+  /* Hero / headline */
+  .hero {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    background: rgba(138, 61, 240, 0.08);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 34px;
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .subhead {
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #8a3df0 0%, #6f2dd8 100%);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 22px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.005em;
+    box-shadow: 0 16px 30px -16px rgba(138, 61, 240, 0.7);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hero-cta svg { width: 18px; height: 18px; }
+  .hero-cta:active { transform: scale(0.985); }
+
+  /* Section */
+  section.block {
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+    margin-top: 28px;
+  }
+  section.block:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+  .section-label .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--purple);
+  }
+  .body-copy p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+    text-wrap: pretty;
+  }
+  .body-copy p:last-child { margin-bottom: 0; }
+  .body-copy p strong { color: var(--ink); font-weight: 700; }
+
+  /* CTA */
+  .cta-card {
+    margin-top: 28px;
+    background: linear-gradient(135deg, #8a3df0 0%, #6f2dd8 100%);
+    color: #fff;
+    border-radius: 22px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 22px 44px -22px rgba(138, 61, 240, 0.7);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::after {
+    content: "";
+    position: absolute;
+    inset: -40% -10% auto auto;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .cta-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+  .cta-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .cta-sub {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 16px;
+    opacity: 0.85;
+  }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;
+    backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .cta-btn.primary {
+    background: #fff;
+    color: var(--purple);
+    border-color: #fff;
+  }
+  .cta-btn:active { transform: scale(0.985); }
+  .cta-btn .arrow {
+    width: 20px;
+    height: 20px;
+    flex: none;
+  }
+  .cta-btn .label-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+  }
+  .cta-btn .label-row small {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .cta-btn.primary .label-row small { opacity: 0.6; color: var(--purple); }
+  .cta-btn .number {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Founders / credibility chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .chip {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-2);
+    background: var(--chip);
+    padding: 7px 12px;
+    border-radius: 999px;
+  }
+
+  /* Team grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 6px;
+  }
+  .team-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px -22px rgba(138, 61, 240, 0.35);
+    border-color: rgba(138, 61, 240, 0.25);
+  }
+  .team-photo-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #f4f4f6;
+  }
+  .team-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+  .team-meta {
+    padding: 16px 18px 18px;
+  }
+  .team-name {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin: 0 0 4px;
+  }
+  .team-role {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin: 0;
+  }
+
+
+  /* Footer */
+  footer {
+    margin-top: 48px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+    color: var(--muted);
+    font-size: 12px;
+  }
+  footer .made {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  footer .heart {
+    color: var(--purple);
+  }
+
+  /* Drawer */
+  .drawer-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,15,0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 40;
+  }
+  .drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100dvh;
+    width: min(86vw, 360px);
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 50;
+    padding: 22px 24px;
+    padding-top: max(22px, env(safe-area-inset-top));
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: -20px 0 60px -20px rgba(0,0,0,0.25);
+  }
+  body.menu-open .drawer { transform: translateX(0); }
+  body.menu-open .drawer-scrim { opacity: 1; pointer-events: auto; }
+  body.menu-open { overflow: hidden; }
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .drawer-head .wordmark { font-size: 18px; }
+  .close-btn {
+    width: 36px; height: 36px;
+    border: none; background: transparent;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+  .close-btn:active { background: var(--chip); }
+  .drawer a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 4px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+  }
+  .drawer a:last-of-type { border-bottom: none; }
+  .drawer a .arrow { width: 18px; height: 18px; color: var(--muted); }
+
+  @media (min-width: 520px) {
+    h1 { font-size: 38px; }
+    .brand-mark { width: 40px; height: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page" data-screen-label="01 Anthrolytic Landing">
+  <div class="topbar">
+    <div class="brand">
+      <img class="brand-mark" src="logo.png" alt="Anthrolytic logo" />
+      <div class="wordmark">Anthrolytic</div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="hero" id="what-we-do">
+    <span class="eyebrow">A note for you</span>
+    <h1>Hey Brandon, Jordan &amp; Sam!</h1>
+    <p class="subhead">Thanks for scanning · Here's the full story.</p>
+    <a class="hero-cta" href="#confirm">
+      <span>Confirm Cake Reception</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <section class="block">
+    <div class="section-label"><span class="dot"></span>The Cold Cake</div>
+    <div class="body-copy">
+      <p>Thank you for scanning our Cold Cake! We've been attempting to reach out to the three of you through LinkedIn but haven't heard any response. Therefore we thought this was the best way to reach you. Now, let's get to business.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-label"><span class="dot"></span>What we do</div>
+    <div class="body-copy">
+      <p>At <strong>Anthrolytic</strong>, we are revolutionising the hiring landscape. More specifically, we're helping make entry-level hiring more time and money efficient. Anthrolytic is doing this through being the first company to pre-screen for soft and interpersonal skills.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-label"><span class="dot"></span>What we want</div>
+    <div class="body-copy">
+      <p>We really think <strong>Blitz Bar</strong> can save time and money with hiring, whilst also improving the staff turnover and company culture as a result.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-label"><span class="dot"></span>Who we are</div>
+    <div class="body-copy">
+      <p>Founded by <strong>two Scopus '24</strong> &amp; <strong>one Bialik '24</strong> grads, we're young and ambitious about changing the hiring landscape.</p>
+    </div>
+  </section>
+
+  <section class="block" id="the-team">
+    <div class="section-label"><span class="dot"></span>The Team</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo-wrap"><img src="team/simeon.jpg" alt="Simeon Goldberg" /></div>
+        <div class="team-meta">
+          <h3 class="team-name">Simeon Goldberg</h3>
+          <p class="team-role">Chief Growth Officer</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap"><img src="team/yoav.jpg" alt="Yoav Goldberg" /></div>
+        <div class="team-meta">
+          <h3 class="team-name">Yoav Goldberg</h3>
+          <p class="team-role">Chief Operating Officer</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap"><img src="team/richard.jpg" alt="Richard Day" /></div>
+        <div class="team-meta">
+          <h3 class="team-name">Richard Day</h3>
+          <p class="team-role">Chief Technology Officer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-card" id="confirm">
+    <h3 class="cta-title">Please confirm you received the cake.</h3>
+    <p class="cta-sub">Call or message Simeon to confirm and schedule a 30 minute meeting.</p>
+    <div class="cta-actions">
+      <a class="cta-btn primary" href="tel:+61490923754">
+        <span class="label-row">
+          <small>Call Simeon</small>
+          <span class="number">0490 923 754</span>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </a>
+      <a class="cta-btn" href="sms:+61490923754">
+        <span class="label-row">
+          <small>Text message</small>
+          <span class="number">Send a text</span>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="made">Sent with <span class="heart">♥</span> from the Anthrolytic team</span>
+  </footer>
+</div>
+
+<!-- Drawer menu -->
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="wordmark">Anthrolytic</div>
+    <button class="close-btn" id="closeBtn" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="#what-we-do">What we do <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+  <a href="#the-team">The team <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+  <a href="#confirm">Confirm <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+</aside>
+
+<script>
+  const body = document.body;
+  const menuBtn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  const scrim = document.getElementById('scrim');
+  const drawer = document.getElementById('drawer');
+  function open() {
+    body.classList.add('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    drawer.setAttribute('aria-hidden', 'false');
+  }
+  function close() {
+    body.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+  menuBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  scrim.addEventListener('click', close);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+</script>
+</body>
+</html>
